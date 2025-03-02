@@ -19,7 +19,7 @@
                 <div class="auth-container" id="authContainer">
                     <!-- Auth buttons will be injected here via JS -->
                 </div>
-                <button id="themeToggle" class="theme-toggle">Dark Mode</button>
+                <button id="themeToggle" class="theme-toggle">M</button>
             </div>
         </div>
     </header>
@@ -29,13 +29,13 @@
             <!-- Left side: Author info -->
             <aside class="author-info" id="authorInfo">
                 <!-- Author info will be injected here via JS -->
-                <div class="loading">Loading author info...</div>
+                <div class="loading">Loading ...</div>
             </aside>
 
             <!-- Middle: Post content -->
             <article class="post-content" id="postContent">
                 <!-- Post content will be injected here via JS -->
-                <div class="loading">Loading post...</div>
+                <div class="loading">Loading ...</div>
                 
                 <div id="commentsSection" class="comments-section">
                     <h3>Comments</h3>
@@ -52,7 +52,7 @@
             <aside class="related-posts" id="relatedPosts">
                 <h3>Other Posts</h3>
                 <!-- Related posts will be injected here via JS -->
-                <div class="loading">Loading posts...</div>
+                <div class="loading">Loading ...</div>
             </aside>
         </div>
         
@@ -106,8 +106,13 @@
                     <input type="password" id="signupPassword" name="password" required>
                 </div>
                 <div class="form-group">
-                    <label for="avatarImage">Avatar Image URL</label>
-                    <input type="text" id="avatarImage" name="avatarUrl">
+                    <label for="avatarImage">Avatar</label>
+                    <div class="file-upload-container">
+                        <label for="avatarImage" class="file-upload-label">Choose file</label>
+                        <span id="fileNameDisplay">No file chosen</span>
+                        <input type="file" id="avatarImage" accept="image/png, image/jpeg, image/gif" name="avatarFile" class="file-upload-input">
+                    </div>
+                    <div id="avatarPreview" class="avatar-preview"></div>
                 </div>
                 <button type="submit" class="btn">Sign Up</button>
                 <p>Already have an account? <a href="#" id="showLoginBtn">Login</a></p>

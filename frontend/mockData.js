@@ -58,7 +58,7 @@ const mockData = {
         },
         {
             id: 3,
-            title: "My Thoughts on Frontend Design in 2025",
+            title: "My Thoughts on Frontend Designed in 2025",
             content: "The frontend landscape continues to evolve rapidly. In this post, I share my perspectives on current trends and where things might be heading.\n\nOne trend I've noticed is the continued rise of component-based architectures. Frameworks like React, Vue, and Svelte have made it easier than ever to build applications from reusable components. This approach has improved developer productivity and code maintainability.\n\nAnother interesting development is the growing popularity of utility-first CSS frameworks like Tailwind. By providing a set of low-level utility classes, these frameworks allow for rapid UI development without the overhead of writing custom CSS.",
             userId: 2,
             author: "janedoe",

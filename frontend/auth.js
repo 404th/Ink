@@ -88,7 +88,7 @@ const updateAuthUI = () => {
         const userInfo = document.createElement('div');
         userInfo.className = 'user-info';
         userInfo.innerHTML = `
-            <span>Hello, ${user.username}</span>
+            <span>${user.username}</span>
             <button id="logoutBtn" class="btn">Logout</button>
         `;
         
@@ -255,6 +255,26 @@ const initModals = () => {
                 alert('Sign up failed. Please try again with different credentials.');
             }
         });
+
+        const form = document.getElementById('signupForm');
+
+        form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        try {
+            const response = await fetch('/api/users/signup', {
+            method: 'POST',
+            body: formData // FormData handles the multipart/form-data encoding
+            });
+            
+            const result = await response.json();
+            // Handle response
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        });
     }
     
     // New post form submission
@@ -306,4 +326,32 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     updateAuthUI();
     initModals();
+});
+
+// Add this to your auth.js or app.js file
+document.addEventListener('DOMContentLoaded', function() {
+    const avatarInput = document.getElementById('avatarImage');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const avatarPreview = document.getElementById('avatarPreview');
+    
+    if (avatarInput) {
+        avatarInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                // Display filename
+                fileNameDisplay.textContent = this.files[0].name;
+                
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    avatarPreview.style.backgroundImage = `url(${e.target.result})`;
+                    avatarPreview.style.display = 'block';
+                }
+                reader.readAsDataURL(this.files[0]);
+            } else {
+                fileNameDisplay.textContent = 'No file chosen';
+                avatarPreview.style.display = 'none';
+                avatarPreview.style.backgroundImage = 'none';
+            }
+        });
+    }
 });
