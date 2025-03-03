@@ -5,7 +5,7 @@ const mockData = {
             id: 1,
             username: "johndoe",
             email: "john@example.com",
-            avatar: "https://picsum.photos/25",
+            avatar: "./assets/whiteLineBlackBackgroundUserIcon.png",
             createdAt: "2024-11-15",
             links: [
                 { title: "Twitter", url: "https://twitter.com" },
@@ -17,7 +17,7 @@ const mockData = {
             id: 2,
             username: "janedoe",
             email: "jane@example.com",
-            avatar: "https://picsum.photos/25",
+            avatar: "./assets/whiteLineBlackBackgroundUserIcon.png",
             createdAt: "2024-12-01",
             links: [
                 { title: "Portfolio", url: "https://portfolio.com" }
@@ -28,7 +28,7 @@ const mockData = {
             id: 3,
             username: "bobsmith",
             email: "bob@example.com",
-            avatar: "https://picsum.photos/25",
+            avatar: "./assets/whiteLineBlackBackgroundUserIcon.png",
             createdAt: "2025-01-10",
             links: [],
             postCount: 7
@@ -36,6 +36,276 @@ const mockData = {
     ],
     
     posts: [
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
+        {
+            id: 1,
+            title: "Getting Started with Go Programming",
+            content: "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. It's a great language for beginners and experienced developers alike. In this post, I'll share my journey learning Go and some tips to help you get started.\n\nOne of the things I love about Go is its simplicity. The syntax is clean and easy to understand, making it accessible for newcomers. The standard library is comprehensive, providing everything you need to build web servers, work with files, and handle common programming tasks.\n\nGo's built-in concurrency features are another highlight. Goroutines and channels make it straightforward to write programs that make efficient use of multiple cores, without getting bogged down in complex threading code.",
+            userId: 1,
+            author: "johndoe",
+            createdAt: "2025-02-15",
+            rating: 42,
+            comments: [1, 2]
+        },
         {
             id: 1,
             title: "Getting Started with Go Programming",

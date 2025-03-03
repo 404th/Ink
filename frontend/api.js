@@ -1,5 +1,5 @@
 // API URLs - CENTRALIZED HERE FOR EASY REPLACEMENT
-const API_BASE_URL = "https://api.example.com"; // Replace with your backend URL
+const API_BASE_URL = "http://localhost:8080"; // Replace with your backend URL
 
 const API_ENDPOINTS = {
     login: `${API_BASE_URL}/auth/login`,

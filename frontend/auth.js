@@ -93,24 +93,24 @@ const updateAuthUI = () => {
         `;
         
         // Add new post button if on main page
-        if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
-            const newPostBtn = document.createElement('button');
-            newPostBtn.id = 'newPostBtn';
-            newPostBtn.className = 'btn new-post-btn';
-            newPostBtn.textContent = 'New Post';
-            userInfo.appendChild(newPostBtn);
+        // if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
+        //     const newPostBtn = document.createElement('button');
+        //     newPostBtn.id = 'newPostBtn';
+        //     newPostBtn.className = 'btn new-post-btn';
+        //     newPostBtn.textContent = 'New Post';
+        //     userInfo.appendChild(newPostBtn);
             
-            // Add event listener for new post button
-            setTimeout(() => {
-                const newPostBtn = document.getElementById('newPostBtn');
-                if (newPostBtn) {
-                    newPostBtn.addEventListener('click', () => {
-                        const newPostModal = document.getElementById('newPostModal');
-                        newPostModal.style.display = 'block';
-                    });
-                }
-            }, 0);
-        }
+        //     // Add event listener for new post button
+        //     setTimeout(() => {
+        //         const newPostBtn = document.getElementById('newPostBtn');
+        //         if (newPostBtn) {
+        //             newPostBtn.addEventListener('click', () => {
+        //                 const newPostModal = document.getElementById('newPostModal');
+        //                 newPostModal.style.display = 'block';
+        //             });
+        //         }
+        //     }, 0);
+        // }
         
         authContainer.appendChild(userInfo);
         
