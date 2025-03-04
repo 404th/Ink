@@ -33,22 +33,11 @@ type ServiceI interface {
 	UserService() UserServiceI
 }
 
-type NewsServiceI interface {
-	// news service
-
-	// news title service
-
-	// news content type service
-
-	// news content service
-
-	// news
-}
-
 type UserServiceI interface {
 	// user service
 	SignupUser(ctx context.Context, req *model.SignupUserRequest) (resp *model.SignupUserResponse, err error)
 	LoginUser(ctx context.Context, req *model.LoginUserRequest) (resp *model.LoginUserResponse, err error)
+	GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error)
 
 	// user role service
 

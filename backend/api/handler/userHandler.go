@@ -87,6 +87,38 @@ func (u *Handler) LoginUser(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
+func (u *Handler) GetUser(c *gin.Context) {
+	id, exists := c.GetQuery("id")
+	if !exists {
+		var errResp model.Response
+		errResp.Message = "Noto'g'ri ma'lumot kiritildi"
+		c.AbortWithStatusJSON(http.StatusBadRequest, errResp)
+		return
+	}
+
+	resp, err := u.service.UserService().GetUser(c.Request.Context(), &model.Id{Id: id})
+	if err != nil {
+		var errResp model.Response
+		u.sugar.Infoln(err)
+		err = helper.ChangeErrorForm(err)
+		errResp.Message = err.Error()
+		errResp.Data = err
+		c.AbortWithStatusJSON(http.StatusBadRequest, errResp)
+		return
+	}
+
+	if resp == nil {
+		var errResp model.Response
+		errResp.Message = "Foydalanuvchi topilmadi"
+		errResp.Data = nil
+		u.sugar.Infoln(err)
+		c.AbortWithStatusJSON(http.StatusBadRequest, errResp)
+		return
+	}
+
+	c.JSON(http.StatusOK, resp)
+}
+
 func (u *Handler) HandleRefreshJWT(c *gin.Context) {
 	var data model.HandleRefreshJWTRequest
 

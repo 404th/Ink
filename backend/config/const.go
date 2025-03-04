@@ -78,9 +78,7 @@ var AllowedFileExt = map[string]bool{
 	// Add other formats as needed.
 }
 
-// DONT USE THESE IN CODE:
-var languageIds map[string]string = map[string]string{
-	"uzbek":   "c103f999-79d6-4b9f-933b-aa1fbb5055cb",
-	"russian": "7c98ea86-43d0-4f1b-8918-b99170951aaa",
-	"english": "82734a7f-b906-41c1-aa59-86a3ce0adc16",
+// Define allowed origins for production
+var AllowedOrigins = []string{
+	"https://api.domain.com",
 }

@@ -31,6 +31,7 @@ type UserPgI interface {
 	// user storage
 	SignupUser(ctx context.Context, req *model.SignupUserRequest) (resp *model.SignupUserResponse, err error)
 	LoginUser(ctx context.Context, req *model.LoginUserRequest) (resp *model.LoginUserResponse, err error)
+	GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error)
 
 	// user role storage
 

@@ -115,6 +115,49 @@ func (u *userPg) LoginUser(ctx context.Context, req *model.LoginUserRequest) (re
 	return
 }
 
+func (u *userPg) GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error) {
+	resp = &model.User{}
+
+	var (
+		query strings.Builder
+	)
+
+	query.WriteString(`
+		SELECT 
+			id,
+			username,
+			email,
+			avatar_url,
+			created_at
+		FROM 
+			"users"
+		WHERE id = $1
+	`)
+
+	var (
+		usr       model.User
+		createdAt sql.NullString
+	)
+
+	if err = u.db.QueryRow(ctx, query.String(), req.Id).Scan(
+		&usr.Id,
+		&usr.Username,
+		&usr.Email,
+		&usr.AvatarUrl,
+		&createdAt,
+	); err != nil {
+		return
+	}
+
+	if createdAt.Valid {
+		usr.CreatedAt = createdAt.String
+	}
+
+	resp = &usr
+
+	return
+}
+
 // func (u *userPg) UpdateUser(ctx context.Context, req *model.UpdateUserRequest) (resp *model.Message, err error) {
 // 	var (
 // 		query, set, filter strings.Builder

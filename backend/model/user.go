@@ -5,15 +5,15 @@ type User struct {
 	Username  string `json:"username" binding:"required"`
 	Email     string `json:"email" binding:"required"`
 	Password  string `json:"password" binding:"required"`
-	AvatarUrl string `json:"avatar_url" binding:"required"`
-	CreatedAt string `json:"created_at" binding:"required"`
+	AvatarUrl string `json:"avatarUrl" binding:"required"`
+	CreatedAt string `json:"createdAt" binding:"required"`
 }
 
 type SignupUserRequest struct {
 	Username  string `json:"username" binding:"required"`
 	Email     string `json:"email" binding:"required"`
 	Password  string `json:"password" binding:"required"`
-	AvatarUrl string `json:"avatar_url" binding:"required"`
+	AvatarUrl string `json:"avatarUrl" binding:"required"`
 }
 
 type SignupUserResponse struct {
@@ -21,8 +21,8 @@ type SignupUserResponse struct {
 	Username  string    `json:"username" binding:"required"`
 	Email     string    `json:"email" binding:"required"`
 	Password  string    `json:"password" binding:"required"`
-	AvatarUrl string    `json:"avatar_url" binding:"required"`
-	TokenSet  *TokenSet `json:"token_set"`
+	AvatarUrl string    `json:"avatarUrl" binding:"required"`
+	TokenSet  *TokenSet `json:"tokenSet"`
 }
 
 type LoginUserRequest struct {
@@ -35,6 +35,6 @@ type LoginUserResponse struct {
 	Username  string    `json:"username" binding:"required"`
 	Email     string    `json:"email" binding:"required"`
 	Password  string    `json:"password" binding:"required"`
-	AvatarUrl string    `json:"avatar_url" binding:"required"`
-	TokenSet  *TokenSet `json:"token_set" binding:"required"`
+	AvatarUrl string    `json:"avatarUrl" binding:"required"`
+	TokenSet  *TokenSet `json:"tokenSet" binding:"required"`
 }

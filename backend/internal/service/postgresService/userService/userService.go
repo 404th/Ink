@@ -76,7 +76,7 @@ func (u *userService) LoginUser(ctx context.Context, req *model.LoginUserRequest
 	}
 
 	if !helper.CheckPasswordHash(req.Password, resp.Password) {
-		err = errors.New("c'g'ri")
+		err = errors.New("noto'g'ri")
 		u.sugar.Infoln("LoginUser ", config.ErrorSplitter, "err", config.ErrorSplitter, err.Error())
 		return nil, err
 	}
@@ -105,6 +105,19 @@ func (u *userService) LoginUser(ctx context.Context, req *model.LoginUserRequest
 	resp.Password = ""
 
 	u.sugar.Infoln("LoginUser ", config.InfoSplitter, "info", config.InfoSplitter, config.ServiceSuccess)
+	return
+}
+
+func (u *userService) GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error) {
+	resp = &model.User{}
+
+	u.sugar.Infoln("GetUser ", config.InfoSplitter, "req", config.InfoSplitter, req)
+	resp, err = u.strg.GetUser(ctx, req)
+	if err != nil {
+		u.sugar.Infoln("GetUser ", config.ErrorSplitter, "err", config.ErrorSplitter, err.Error())
+		return
+	}
+
 	return
 }
 

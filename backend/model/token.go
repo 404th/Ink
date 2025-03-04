@@ -14,9 +14,9 @@ type JwtCustomRefreshClaims struct {
 }
 
 type HandleRefreshJWTRequest struct {
-	RefreshToken string `json:"refresh_token" binding:"required"`
+	RefreshToken string `json:"refreshToken" binding:"required"`
 }
 
 type HandleRefreshJWTResponse struct {
-	NewAccessToken string `json:"new_access_token" binding:"required"`
+	NewAccessToken string `json:"newAccessToken" binding:"required"`
 }

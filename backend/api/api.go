@@ -27,6 +27,7 @@ func Run(cfg *config.Config, sugar *zap.SugaredLogger, h *handler.Handler) *gin.
 	r := gin.Default()
 
 	r.Use(ginzap.Ginzap(sugar.Desugar(), time.RFC3339, true))
+	r.Use(middleware.CORSMiddleware(config.AllowedOrigins))
 
 	// r.Use(CustomMiddleware()) // Custom middleware (if needed)
 
@@ -44,6 +45,7 @@ func Run(cfg *config.Config, sugar *zap.SugaredLogger, h *handler.Handler) *gin.
 	// user
 	r.POST("/api/users/login", h.LoginUser)
 	r.POST("/api/users/signup", h.SignupUser)
+	r.GET("/api/users/user", middleware.AuthMiddleware(cfg.AccessTokenSecret), h.GetUser)
 
 	return r
 }
