@@ -1,13 +1,13 @@
 // API URLs - CENTRALIZED HERE FOR EASY REPLACEMENT
-const API_BASE_URL = "http://localhost:8080"; // Replace with your backend URL
+const API_BASE_URL = "http://localhost:7700"; // Replace with your backend URL
 
 const API_ENDPOINTS = {
-    login: `${API_BASE_URL}/auth/login`,
-    signup: `${API_BASE_URL}/auth/signup`,
+    login: `${API_BASE_URL}/api/users/login`,
+    signup: `${API_BASE_URL}/api/users/signup`,
     posts: `${API_BASE_URL}/posts`,
     post: (id) => `${API_BASE_URL}/posts/${id}`,
     comments: (postId) => `${API_BASE_URL}/posts/${postId}/comments`,
-    user: (id) => `${API_BASE_URL}/users/${id}`,
+    user: (id) => `${API_BASE_URL}/api/users/user?id=${id}`,
     userPosts: (id) => `${API_BASE_URL}/users/${id}/posts`,
     vote: (postId) => `${API_BASE_URL}/posts/${postId}/vote`
 };
@@ -26,8 +26,22 @@ const api = {
             if (!response.ok) {
                 throw new Error('Login failed');
             }
+
+            let data = await response.json()
             
-            return await response.json();
+            return {
+                accessToken: data.tokenSet.accessToken,
+                refreshToken: data.tokenSet.refreshToken,
+                user: {
+                    id: data.id,
+                    username: data.username,
+                    email: data.email,
+                    avatar: data.avatarUrl,
+                    createdAt: data.createdAt,
+                    links: ["https://github.com/404th"],
+                    postCount: 0
+                }
+            };
         } catch (error) {
             console.error('Login error:', error);
             // Fallback to mock data for development
@@ -53,8 +67,22 @@ const api = {
             if (!response.ok) {
                 throw new Error('Signup failed');
             }
+
+            let data = await response.json()
             
-            return await response.json();
+            return {
+                accessToken: data.tokenSet.accessToken,
+                refreshToken: data.tokenSet.refreshToken,
+                user: {
+                    id: data.id,
+                    username: data.username,
+                    email: data.email,
+                    avatar: data.avatarUrl,
+                    createdAt: data.createdAt,
+                    links: ["https://github.com/404th"],
+                    postCount: 0
+                }
+            }
         } catch (error) {
             console.error('Signup error:', error);
             // For development, simulate successful signup with mock data
@@ -188,15 +216,24 @@ const api = {
     },
     
     // User methods
-    getUser: async (id) => {
+    getUser: async id => {
         try {
-            const response = await fetch(API_ENDPOINTS.user(id));
+            const response = await fetch(API_ENDPOINTS.user(id),
+                { 
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
+            );
             
             if (!response.ok) {
                 throw new Error('Failed to fetch user');
             }
             
-            return await response.json();
+            let usr = await response.json();
+
+            return usr
         } catch (error) {
             console.error('Fetch user error:', error);
             // Fallback to mock data

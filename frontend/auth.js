@@ -14,15 +14,17 @@ const auth = {
     },
     
     // Login user
+    // TODO
     login: async (username, password) => {
         try {
-            const { token, user } = await api.login(username, password);
+            const { accessToken, refreshToken, user } = await api.login(username, password);
             
             // Store token and user in local storage
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
             localStorage.setItem('user', JSON.stringify(user));
             
-            return { token, user };
+            return { accessToken, refreshToken, user };
         } catch (error) {
             console.error('Login error:', error);
             throw error;
@@ -32,13 +34,14 @@ const auth = {
     // Register new user
     signup: async (userData) => {
         try {
-            const { token, user } = await api.signup(userData);
-            
+            let response = await api.signup(userData)
+
             // Store token and user in local storage
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
-            
-            return { token, user };
+            localStorage.setItem('refreshToken', response.refreshToken);
+            localStorage.setItem('token', response.accessToken);
+            localStorage.setItem('user', JSON.stringify(response.user));
+
+            return response;
         } catch (error) {
             console.error('Signup error:', error);
             throw error;
@@ -46,16 +49,22 @@ const auth = {
     },
     
     // Logout user
-    logout: () => {
+    logout: () => {            
         // Remove token and user from local storage
         localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
         
         return { isAuthenticated: false, token: null, user: null };
     },
     
     // Check if user is authenticated
-    isAuthenticated: () => {
+    isAuthenticated: async () => {
+        
+        let u = localStorage.getItem('user');
+        const usr = await api.getUser(JSON.parse(u).id);
+        localStorage.setItem('usr', JSON.stringify(usr));
+        
         const token = localStorage.getItem('token');
         return !!token;
     },
@@ -246,6 +255,7 @@ const initModals = () => {
             
             try {
                 await auth.signup(userData);
+
                 // Close modal and update UI
                 signupModal.style.display = 'none';
                 updateAuthUI();
@@ -256,25 +266,26 @@ const initModals = () => {
             }
         });
 
-        const form = document.getElementById('signupForm');
+        // const form = document.getElementById('signupForm');
 
-        form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        
-        try {
-            const response = await fetch('/api/users/signup', {
-            method: 'POST',
-            body: formData // FormData handles the multipart/form-data encoding
-            });
+        // form.addEventListener('submit', async function(e) {
+        //     e.preventDefault();
             
-            const result = await response.json();
-            // Handle response
-        } catch (error) {
-            console.error('Error:', error);
-        }
-        });
+        //     const formData = new FormData(this);
+            
+        //     try {
+        //         const response = await fetch('/api/users/signup', {
+        //             method: 'POST',
+        //             body: formData // FormData handles the multipart/form-data encoding
+        //         });
+                
+        //         const result = await response.json();
+        //         // Handle response
+                
+        //     } catch (error) {
+        //         console.error('Error:', error);
+        //     }
+        // });
     }
     
     // New post form submission
