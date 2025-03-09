@@ -1,0 +1,6 @@
+1. comment crud
+2. upvote/downvote crud
+3. add "author" to response while getting post
+4. add "links" to response while getting post
+5. get author posts api
+6. connect to tigres to upload files

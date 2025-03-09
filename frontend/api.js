@@ -4,12 +4,12 @@ const API_BASE_URL = "http://localhost:7700"; // Replace with your backend URL
 const API_ENDPOINTS = {
     login: `${API_BASE_URL}/api/users/login`,
     signup: `${API_BASE_URL}/api/users/signup`,
-    posts: `${API_BASE_URL}/posts`,
-    post: (id) => `${API_BASE_URL}/posts/${id}`,
-    comments: (postId) => `${API_BASE_URL}/posts/${postId}/comments`,
+    posts: `${API_BASE_URL}/api/posts`,
+    post: (id) => `${API_BASE_URL}/api/posts?id=${id}`,
+    // comments: (postId) => `${API_BASE_URL}/posts/${postId}/comments`,
     user: (id) => `${API_BASE_URL}/api/users/user?id=${id}`,
-    userPosts: (id) => `${API_BASE_URL}/users/${id}/posts`,
-    vote: (postId) => `${API_BASE_URL}/posts/${postId}/vote`
+    // userPosts: (id) => `${API_BASE_URL}/users/${id}/posts`,
+    // vote: (postId) => `${API_BASE_URL}/posts/${postId}/vote`
 };
 
 // API Service
@@ -54,7 +54,7 @@ const api = {
             }
             throw error;
         }
-    },
+    }, // XXX
     
     signup: async (userData) => {
         try {
@@ -71,14 +71,14 @@ const api = {
             let data = await response.json()
             
             return {
-                accessToken: data.tokenSet.accessToken,
-                refreshToken: data.tokenSet.refreshToken,
+                accessToken: data.data.tokenSet.accessToken,
+                refreshToken: data.data.tokenSet.refreshToken,
                 user: {
-                    id: data.id,
-                    username: data.username,
-                    email: data.email,
-                    avatar: data.avatarUrl,
-                    createdAt: data.createdAt,
+                    id: data.data.id,
+                    username: data.data.username,
+                    email: data.data.email,
+                    avatar: data.data.avatarUrl,
+                    createdAt: data.data.createdAt,
                     links: ["https://github.com/404th"],
                     postCount: 0
                 }
@@ -99,34 +99,58 @@ const api = {
                 }
             };
         }
-    },
+    }, // XXX
     
     // Posts methods
     getPosts: async () => {
         try {
-            const response = await fetch(API_ENDPOINTS.posts);
+            const response = await fetch(
+                API_ENDPOINTS.posts,
+                {
+                    method: "GET",
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                },
+            );
+
+            let data = await response.json()
             
             if (!response.ok) {
                 throw new Error('Failed to fetch posts');
             }
             
-            return await response.json();
+            return data.posts;
         } catch (error) {
             console.error('Fetch posts error:', error);
             // Fallback to mock data
             return mockData.posts;
         }
-    },
+    }, // TODO
     
     getPost: async (id) => {
         try {
-            const response = await fetch(API_ENDPOINTS.post(id));
+            const response = await fetch(
+                API_ENDPOINTS.post(id), 
+                {
+                    method: "GET",
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                },
+            );
             
             if (!response.ok) {
                 throw new Error('Failed to fetch post');
             }
+
+            let data = await response.json();
+
+            if (data.posts.length < 1) {
+                data = {posts: []}
+            }
             
-            return await response.json();
+            return data;
         } catch (error) {
             console.error('Fetch post error:', error);
             // Fallback to mock data
@@ -149,7 +173,13 @@ const api = {
                 throw new Error('Failed to create post');
             }
             
-            return await response.json();
+            let postResp = await response.json()
+            
+            console.log("postResp")
+            console.log(postResp)
+            console.log("postResp")
+
+            return postResp;
         } catch (error) {
             console.error('Create post error:', error);
             // For development, simulate successful post creation
@@ -216,13 +246,13 @@ const api = {
     },
     
     // User methods
-    getUser: async id => {
+    getUser: async (id, token) => {
         try {
             const response = await fetch(API_ENDPOINTS.user(id),
                 { 
                     method: "GET",
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        "Authorization": `Bearer ${token}`
                     }
                 }
             );

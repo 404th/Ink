@@ -14,7 +14,6 @@ const auth = {
     },
     
     // Login user
-    // TODO
     login: async (username, password) => {
         try {
             const { accessToken, refreshToken, user } = await api.login(username, password);
@@ -34,14 +33,12 @@ const auth = {
     // Register new user
     signup: async (userData) => {
         try {
-            let response = await api.signup(userData)
+            let { accessToken, refreshToken, user } = await api.signup(userData)
 
             // Store token and user in local storage
-            localStorage.setItem('refreshToken', response.refreshToken);
-            localStorage.setItem('token', response.accessToken);
-            localStorage.setItem('user', JSON.stringify(response.user));
-
-            return response;
+            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem('token', accessToken);
+            localStorage.setItem('user', JSON.stringify(user));
         } catch (error) {
             console.error('Signup error:', error);
             throw error;
@@ -59,12 +56,7 @@ const auth = {
     },
     
     // Check if user is authenticated
-    isAuthenticated: async () => {
-        
-        let u = localStorage.getItem('user');
-        const usr = await api.getUser(JSON.parse(u).id);
-        localStorage.setItem('usr', JSON.stringify(usr));
-        
+    isAuthenticated: () => {        
         const token = localStorage.getItem('token');
         return !!token;
     },
@@ -292,8 +284,10 @@ const initModals = () => {
     if (newPostForm) {
         newPostForm.addEventListener('submit', async (event) => {
             event.preventDefault();
-            
-            const postData = {
+            let user = localStorage.getItem("user")
+            let userObject = JSON.parse(user)
+            let postData = {
+                user_id: userObject.id,
                 title: document.getElementById('postTitle').value,
                 content: document.getElementById('postContent').value
             };

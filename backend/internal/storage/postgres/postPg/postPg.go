@@ -1,4 +1,4 @@
-package userPg
+package postPg
 
 import (
 	"context"
@@ -6,154 +6,137 @@ import (
 	"strings"
 
 	"github.com/404th/Ink/model"
+	"github.com/404th/Ink/pkg/helper"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-type userPg struct {
+type postPg struct {
 	db *pgxpool.Pool
 }
 
-func NewUserPg(db *pgxpool.Pool) *userPg {
-	return &userPg{
+func NewPostPg(db *pgxpool.Pool) *postPg {
+	return &postPg{
 		db: db,
 	}
 }
 
-func (u *userPg) SignupUser(ctx context.Context, req *model.SignupUserRequest) (resp *model.SignupUserResponse, err error) {
-	resp = &model.SignupUserResponse{}
+func (u *postPg) CreatePost(ctx context.Context, req *model.CreatePostRequest) (resp *model.Post, err error) {
+	resp = &model.Post{}
 
 	var (
 		query strings.Builder
-		id    string
+		id    sql.NullString
 	)
 
 	query.WriteString(`
-		INSERT INTO "users" (
-			username,
-			email,
-			password,
-			avatar_url
+		INSERT INTO "posts" (
+			user_id,
+			title,
+			content
 		) VALUES (
 			$1,
 			$2,
-			$3,
-			$4
+			$3
 		) RETURNING id
 	`)
 
 	if err = u.db.QueryRow(
 		ctx,
 		query.String(),
-		req.Username,
-		req.Email,
-		req.Password,
-		req.AvatarUrl,
+		req.UserId,
+		req.Title,
+		req.Content,
 	).Scan(&id); err != nil {
 		return
 	}
 
-	resp.Id = id
-	resp.Username = req.Username
-	resp.Email = req.Email
-	resp.AvatarUrl = req.AvatarUrl
+	if id.Valid {
+		resp.Id = id.String
+	}
+
+	resp.UserId = req.UserId
+	resp.Title = req.Title
+	resp.Content = req.Content
 
 	return
 }
 
-func (u *userPg) LoginUser(ctx context.Context, req *model.LoginUserRequest) (resp *model.LoginUserResponse, err error) {
-	resp = &model.LoginUserResponse{}
+func (u *postPg) GetAllPosts(ctx context.Context, req *model.GetAllPostsRequest) (resp *model.GetAllPostsResponse, err error) {
+	resp = &model.GetAllPostsResponse{}
 
 	var (
-		query strings.Builder
+		query, filter, arrangement, order, groupBy strings.Builder
+		arr                                        []any
 	)
 
-	query.WriteString(`
-		SELECT 
-			"users".id id,
-			"users".username username,
-			"users".email email,
-			"users".avatar_url avatar_url,
-			"users".password password
-		FROM "users" 
-		WHERE "users".username = $1
+	params := map[string]any{}
+	posts := []*model.Post{}
+
+	groupBy.WriteString(`
+		GROUP BY 
+			id,
+			user_id,
+			title,
+			content,
+			created_at 
+	`)
+	arrangement.WriteString(" DESC")
+	order.WriteString(` ORDER BY "posts".created_at`)
+	filter.WriteString(`
+		WHERE 1=1 
 	`)
 
-	var (
-		id_sql, username_sql, email_sql, password_sql, avatar_url_sql sql.NullString
-	)
-
-	if err = u.db.QueryRow(ctx, query.String(), req.Username).Scan(
-		&id_sql,
-		&username_sql,
-		&email_sql,
-		&avatar_url_sql,
-		&password_sql,
-	); err != nil {
-		return
+	if len(req.Id) > 0 {
+		filter.WriteString(`AND "posts".id = :id`)
+		params["id"] = req.Id
 	}
-
-	if id_sql.Valid {
-		resp.Id = id_sql.String
-	}
-
-	if username_sql.Valid {
-		resp.Username = username_sql.String
-	}
-
-	if email_sql.Valid {
-		resp.Email = email_sql.String
-	}
-
-	if password_sql.Valid {
-		resp.Password = password_sql.String
-	}
-
-	if avatar_url_sql.Valid {
-		resp.AvatarUrl = avatar_url_sql.String
-	}
-
-	return
-}
-
-func (u *userPg) GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error) {
-	resp = &model.User{}
-
-	var (
-		query strings.Builder
-	)
 
 	query.WriteString(`
 		SELECT 
 			id,
-			username,
-			email,
-			avatar_url,
-			created_at
+			user_id,
+			title,
+			content,
+			created_at 
 		FROM 
-			"users"
-		WHERE id = $1
+			"posts" 
 	`)
 
-	var (
-		usr       model.User
-		createdAt sql.NullString
-	)
+	query.WriteString(filter.String())
+	query.WriteString(groupBy.String())
+	query.WriteString(order.String())
+	query.WriteString(arrangement.String())
+	q, arr := helper.ReplaceQueryParams(query.String(), params)
+	rows, err := u.db.Query(ctx, q, arr...)
 
-	if err = u.db.QueryRow(ctx, query.String(), req.Id).Scan(
-		&usr.Id,
-		&usr.Username,
-		&usr.Email,
-		&usr.AvatarUrl,
-		&createdAt,
-	); err != nil {
-		return
+	println(query.String())
+
+	for rows.Next() {
+		var (
+			data         model.Post
+			createdAtSql sql.NullString
+		)
+
+		if err = rows.Scan(
+			&data.Id,
+			&data.UserId,
+			&data.Title,
+			&data.Content,
+			&createdAtSql,
+		); err != nil {
+			err = nil
+			continue
+		}
+
+		if createdAtSql.Valid {
+			data.CreatedAt = createdAtSql.String
+		}
+
+		posts = append(posts, &data)
 	}
+	rows.Close()
 
-	if createdAt.Valid {
-		usr.CreatedAt = createdAt.String
-	}
-
-	resp = &usr
+	resp.Posts = posts
 
 	return
 }
@@ -463,7 +446,7 @@ func (u *userPg) GetUser(ctx context.Context, req *model.Id) (resp *model.User, 
 // func (r *userPg) GetAllUserRoles(ctx context.Context, req *model.GetAllUserRolesRequest) (resp *model.GetAllUserRolesResponse, err error) {
 // 	var (
 // 		query, cQuery, filter, offset, limit, arrangement, order strings.Builder
-// 		arr                                                      []interface{} here
+// 		arr                                                      []interface{}
 // 	)
 
 // 	resp = &model.GetAllUserRolesResponse{}

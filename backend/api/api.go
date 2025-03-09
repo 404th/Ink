@@ -45,7 +45,11 @@ func Run(cfg *config.Config, sugar *zap.SugaredLogger, h *handler.Handler) *gin.
 	// user
 	r.POST("/api/users/login", h.LoginUser)
 	r.POST("/api/users/signup", h.SignupUser)
-	r.GET("/api/users/user", middleware.AuthMiddleware(cfg.AccessTokenSecret), h.GetUser)
+	r.GET("/api/users/user", h.GetUser)
+
+	// post
+	r.POST("/api/posts", middleware.AuthMiddleware(cfg.AccessTokenSecret), h.CreatePost)
+	r.GET("/api/posts", h.GetAllPosts)
 
 	return r
 }

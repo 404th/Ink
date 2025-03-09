@@ -13,7 +13,7 @@ const loadPost = async () => {
       window.location.href = 'index.html';
       return;
   }
-  
+
   const postContent = document.getElementById('postContent');
   const authorInfo = document.getElementById('authorInfo');
   const relatedPosts = document.getElementById('relatedPosts');
@@ -22,7 +22,10 @@ const loadPost = async () => {
   
   try {
       // Fetch post data
-      const post = await api.getPost(postId);
+      const data = await api.getPost(postId);
+
+      let post = data.posts[0]
+      
       if (!post) {
           postContent.innerHTML = '<p class="error">Post not found.</p>';
           return;
@@ -72,7 +75,8 @@ const loadPost = async () => {
       }
       
       // Fetch user data
-      const user = await api.getUser(post.userId);
+      let token = auth.getToken()
+      const user = await api.getUser(post.user_id, token);
       
       // Display author info
       authorInfo.innerHTML = `

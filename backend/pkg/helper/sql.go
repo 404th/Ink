@@ -6,10 +6,10 @@ import (
 	"time"
 )
 
-func ReplaceQueryParams(namedQuery string, params map[string]interface{}) (string, []interface{}) {
+func ReplaceQueryParams(namedQuery string, params map[string]any) (string, []any) {
 	var (
 		i    int = 1
-		args []interface{}
+		args []any
 	)
 
 	for k, v := range params {
@@ -27,7 +27,7 @@ func ReplaceQueryParams(namedQuery string, params map[string]interface{}) (strin
 	return namedQuery, args
 }
 
-func CheckPostgresTimestamp(value interface{}) bool {
+func CheckPostgresTimestamp(value any) bool {
 	// Check if the value is a string
 	str, ok := value.(string)
 	if !ok {

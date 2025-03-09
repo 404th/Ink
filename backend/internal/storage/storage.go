@@ -3,6 +3,7 @@ package storage
 import (
 	"context"
 
+	"github.com/404th/Ink/internal/storage/postgres/postPg"
 	"github.com/404th/Ink/internal/storage/postgres/userPg"
 	"github.com/404th/Ink/model"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -22,9 +23,14 @@ func (s *storage) User() UserPgI {
 	return userPg.NewUserPg(s.db)
 }
 
+func (s *storage) Post() PostPgI {
+	return postPg.NewPostPg(s.db)
+}
+
 // abstract interfaces
 type StorageI interface {
 	User() UserPgI
+	Post() PostPgI
 }
 
 type UserPgI interface {
@@ -32,8 +38,10 @@ type UserPgI interface {
 	SignupUser(ctx context.Context, req *model.SignupUserRequest) (resp *model.SignupUserResponse, err error)
 	LoginUser(ctx context.Context, req *model.LoginUserRequest) (resp *model.LoginUserResponse, err error)
 	GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error)
+}
 
-	// user role storage
-
-	// user data storage
+type PostPgI interface {
+	// post service
+	CreatePost(ctx context.Context, req *model.CreatePostRequest) (resp *model.Post, err error)
+	GetAllPosts(ctx context.Context, req *model.GetAllPostsRequest) (resp *model.GetAllPostsResponse, err error)
 }

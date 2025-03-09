@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/404th/Ink/config"
+	"github.com/404th/Ink/internal/service/postgresService/postService"
 	"github.com/404th/Ink/internal/service/postgresService/userService"
 	"github.com/404th/Ink/internal/storage"
 	"github.com/404th/Ink/internal/tigres"
@@ -31,6 +32,7 @@ func NewService(cfg *config.Config, sugar *zap.SugaredLogger, strg storage.Stora
 
 type ServiceI interface {
 	UserService() UserServiceI
+	PostService() PostServiceI
 }
 
 type UserServiceI interface {
@@ -38,10 +40,12 @@ type UserServiceI interface {
 	SignupUser(ctx context.Context, req *model.SignupUserRequest) (resp *model.SignupUserResponse, err error)
 	LoginUser(ctx context.Context, req *model.LoginUserRequest) (resp *model.LoginUserResponse, err error)
 	GetUser(ctx context.Context, req *model.Id) (resp *model.User, err error)
+}
 
-	// user role service
-
-	// user data service
+type PostServiceI interface {
+	// post service
+	CreatePost(ctx context.Context, req *model.CreatePostRequest) (resp *model.Post, err error)
+	GetAllPosts(ctx context.Context, req *model.GetAllPostsRequest) (resp *model.GetAllPostsResponse, err error)
 }
 
 func (s *service) UserService() UserServiceI {
@@ -51,4 +55,13 @@ func (s *service) UserService() UserServiceI {
 	}
 
 	return s.strg.User()
+}
+
+func (s *service) PostService() PostServiceI {
+	postServiceN := postService.NewPostService(s.cfg, s.sugar, s.strg.Post())
+	if postServiceN != nil {
+		return postServiceN
+	}
+
+	return s.strg.Post()
 }
